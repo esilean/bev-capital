@@ -1,0 +1,61 @@
+@import '../../../styles/variables.less';
+
+.logo {
+    height: 4.45rem;
+}
+
+.nav-user {
+    display    : flex;
+    align-items: center;
+}
+
+.nav-btn {
+    & {
+        &:link {
+            &:visited {
+                text-transform : uppercase;
+                text-decoration: none;
+                display        : inline-flex;
+                align-items    : center;
+                background     : none;
+                font-family    : inherit;
+                cursor         : pointer;
+                transition     : all .2s;
+            }
+        }
+    }
+
+    &:hover {
+        transform : translateY(-0.3rem);
+        box-shadow: 0 1rem 2rem rgba(@color-black, .2);
+
+        &::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity  : 0;
+        }
+    }
+
+    &:active {
+        outline   : none;
+        transform : translateY(-0.1rem);
+        box-shadow: 0 0.5rem 1rem rgba(@color-black, .2);
+
+    }
+}
+
+.nav-login {
+    margin-right: 2rem;
+    font-size   : 1.2rem;
+    font-weight : 400;
+    color       : @color-primary;
+
+}
+
+.nav-signup {
+    font-size       : 1.2rem;
+    background-color: @color-primary;
+    color           : @color-black;
+    padding         : 0.8rem 1.2rem;
+    border-radius   : 1.5rem;
+    box-shadow      : @shadow-light;
+}
