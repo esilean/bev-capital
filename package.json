@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --mode development --progress --hot",
-    "format": "prettier --write \"src/**/*.ts\"",
-    "eslint-fix": "eslint --fix \"src/**/*.ts\""
+    "format": "prettier --write \"src/**/*.tsx\"",
+    "eslint-fix": "eslint --fix \"src/**/*.tsx\""
   },
   "dependencies": {
     "react": "^16.13.1",

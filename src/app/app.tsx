@@ -8,16 +8,15 @@ import '../styles/layout.less'
 
 import { Home } from '../pages/home'
 
-export const App = () =>
-    (
-        <div className='container'>
-            <NavBar />
-            <div className='content'>
-                <Switch>
-                    <Route exact path='/' component={Home} />
-                    <Redirect from='*' to='/' />
-                </Switch>
-            </div>
-            <Footer />
-        </div>
-    )
+export const App = () => (
+  <div className="container">
+    <NavBar />
+    <div className="content">
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Redirect from="*" to="/" />
+      </Switch>
+    </div>
+    <Footer />
+  </div>
+)

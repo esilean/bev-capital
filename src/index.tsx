@@ -6,6 +6,8 @@ import { Routes } from './app/routes'
 import './styles/global.less'
 
 ReactDOM.render(
-    <React.StrictMode>
-        <Routes></Routes>
-    </React.StrictMode>, document.getElementById('root'))
+  <React.StrictMode>
+    <Routes></Routes>
+  </React.StrictMode>,
+  document.getElementById('root')
+)
