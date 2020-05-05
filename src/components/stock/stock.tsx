@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 import { StockCard } from './card'
 import { StockCardNew } from './card-new'

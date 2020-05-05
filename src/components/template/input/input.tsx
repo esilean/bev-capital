@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { FieldError } from 'react-hook-form'
 
 import './styles.less'
@@ -8,7 +8,7 @@ interface InputProps {
   name: string
   type: string
   placeholder: string
-  error: FieldError
+  error: FieldError | undefined
   register: any
 }
 

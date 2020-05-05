@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 import { NavBar } from '../components/template/navbar'
 import { Footer } from '../components/template/footer'
