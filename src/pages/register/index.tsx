@@ -5,20 +5,22 @@ import { useForm } from 'react-hook-form'
 import { Input } from '../../components/template/input/input'
 
 import logoImg from '../../assets/logo/logo-bev-capital.png'
-import './styles.less'
+import '../login/styles.less'
 
-interface LoginData {
+interface RegisterData {
+  name: string
   email: string
   password: string
 }
 
-export const Login = () => {
+export const Register = () => {
   const history = useHistory()
 
-  const { register, handleSubmit, errors } = useForm<LoginData>()
+  const { register, handleSubmit, errors } = useForm<RegisterData>()
 
-  function onSubmit(data: LoginData) {
+  function onSubmit(data: RegisterData) {
     console.log(data)
+
     history.replace('/')
   }
 
@@ -28,6 +30,15 @@ export const Login = () => {
       <h2>Bev Capital</h2>
       <section className="form">
         <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            label="Nome"
+            type="text"
+            name="name"
+            placeholder="Informe seu nome"
+            error={errors.name}
+            register={register({ required: true })}
+          />
+
           <Input
             label="Email"
             type="text"
@@ -47,7 +58,7 @@ export const Login = () => {
           />
 
           <button className="btn btn-bg" type="submit">
-            Entrar
+            Cadastrar
           </button>
         </form>
       </section>

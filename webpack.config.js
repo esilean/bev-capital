@@ -7,9 +7,11 @@ module.exports = {
     output: {
         path: path.join(__dirname, '/dist'),
         filename: 'bundle.min.js',
+        publicPath: '/'
     },
     devServer: {
         port: 8080,
+        historyApiFallback: true
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js']

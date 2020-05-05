@@ -1,10 +1,7 @@
 import * as React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
 
 import { NavBar } from '../components/template/navbar'
 import { Footer } from '../components/template/footer'
-
-import '../styles/layout.less'
 
 import { Home } from '../pages/home'
 
@@ -12,10 +9,7 @@ export const App = () => (
   <div className="container">
     <NavBar />
     <div className="content">
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Redirect from="*" to="/" />
-      </Switch>
+      <Home />
     </div>
     <Footer />
   </div>

@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom'
 
 import { Routes } from './app/routes'
 
-import './styles/global.less'
+import './styles/all.less'
 
 ReactDOM.render(
   <React.StrictMode>

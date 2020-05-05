@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Link } from 'react-router-dom'
 
 import logoImg from '../../../assets/logo/logo-bev-capital.png'
 import './styles.less'
@@ -8,12 +9,15 @@ export const NavBar = () => {
     <div className="header">
       <img src={logoImg} className="logo" />
       <nav className="nav-user">
-        <a href="#" className="nav-btn nav-login">
+        <Link to="/login" className="btn btn-text">
+          Sair
+        </Link>
+        <Link to="/login" className="btn btn-text">
           Login
-        </a>
-        <a href="#" className="nav-btn nav-signup">
+        </Link>
+        <Link to="/register" className="btn btn-bg">
           Cadastre-se
-        </a>
+        </Link>
       </nav>
     </div>
   )
