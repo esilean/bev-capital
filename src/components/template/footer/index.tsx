@@ -1,8 +1,8 @@
-import React from 'react'
+import * as React from 'react'
 
 import './styles.less'
 
-export default function footer() {
+export const Footer = () => {
     return (
         <div className='footer'>
             <div className='footer-logo'>

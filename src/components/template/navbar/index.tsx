@@ -1,9 +1,9 @@
-import React from 'react'
+import * as React from 'react'
 
 import logoImg from '../../../assets/logo/logo-bev-capital.png'
 import './styles.less'
 
-export default function navbar() {
+export const NavBar = () => {
     return (
         <div className='header'>
             <img src={logoImg} className="logo" />

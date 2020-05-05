@@ -1,15 +1,15 @@
-import React from 'react'
+import * as React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
-import NavBar from '../components/template/navbar'
-import Footer from '../components/template/footer'
+import { NavBar } from '../components/template/navbar'
+import { Footer } from '../components/template/footer'
 
 import '../styles/layout.less'
 
-import Home from '../pages/home'
+import { Home } from '../pages/home'
 
-export default function app() {
-    return (
+export const App = () =>
+    (
         <div className='container'>
             <NavBar />
             <div className='content'>
@@ -21,4 +21,3 @@ export default function app() {
             <Footer />
         </div>
     )
-}

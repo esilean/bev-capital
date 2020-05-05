@@ -1,9 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import * as React from 'react'
 
 import './styles.less'
 
-export default function StockCard({ name }) {
+interface StockCardProps {
+    name: string
+}
+
+export const StockCard = ({ name }: StockCardProps) => {
     return (
         <li>
             <div className='card'>
@@ -36,8 +39,4 @@ export default function StockCard({ name }) {
             </div>
         </li>
     )
-}
-
-StockCard.propTypes = {
-    name: PropTypes.string.isRequired
 }

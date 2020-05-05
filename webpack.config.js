@@ -1,23 +1,35 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     devtool: 'inline-source-map',
-    entry: './src/index.js',
+    entry: './src/index.tsx',
     output: {
-        path: path.join(__dirname, '/public'),
-        publicPath: '/',
-        filename: './bundle.js',
+        path: path.join(__dirname, '/dist'),
+        filename: 'bundle.min.js',
     },
     devServer: {
         port: 8080,
-        contentBase: './public',
     },
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js']
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './public/index.html'
+        })
+    ],
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.ts(x?)$/,
                 exclude: /node_modules/,
-                use: ['babel-loader', 'eslint-loader']
+                use: ['ts-loader', 'eslint-loader']
+            },
+            {
+                enforce: 'pre',
+                test: /\.js$/,
+                loader: 'source-map-loader'
             },
             {
                 test: /\.less$/,

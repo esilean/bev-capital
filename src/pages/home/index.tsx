@@ -1,10 +1,10 @@
-import React from 'react'
+import * as React from 'react'
 
-import Stocks from '../../components/stock/stock'
+import { Stocks } from '../../components/stock/stock'
 
 import './styles.less'
 
-export default function Home() {
+export const Home = () => {
     return (
         <div className='home'>
             <Stocks />

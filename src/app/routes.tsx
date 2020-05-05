@@ -1,9 +1,9 @@
-import React from 'react'
+import * as React from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
-import App from './app'
+import { App } from './app'
 
-export default function routes() {
+export const Routes = () => {
     return (
         <BrowserRouter>
             <Switch>
