@@ -2,7 +2,7 @@ import React from 'react'
 
 import './styles.less'
 
-export const Footer = () => {
+export const Footer: React.FC = (): JSX.Element => {
   return (
     <div className="footer">
       <div className="footer-logo">
@@ -20,10 +20,7 @@ export const Footer = () => {
             </a>
           </li>
           <li>
-            <a
-              href="https://www.linkedin.com/in/leandro-bevilaqua-461a2428/"
-              title="Linkedin"
-            >
+            <a href="https://www.linkedin.com/in/leandro-bevilaqua-461a2428/" title="Linkedin">
               Linkedin
             </a>
           </li>

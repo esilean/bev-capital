@@ -1,26 +1,26 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import toast from '../../components/toastr'
 
 import { Input } from '../../components/template/input/input'
 
 import logoImg from '../../assets/logo/logo-bev-capital.png'
 import '../login/styles.less'
 
-interface RegisterData {
+type RegisterData = {
   name: string
   email: string
   password: string
 }
 
-export const Register = () => {
+export const Register: React.FC = () => {
   const history = useHistory()
 
   const { register, handleSubmit, errors } = useForm<RegisterData>()
 
-  function onSubmit(data: RegisterData) {
-    console.log(data)
-
+  async function onSubmit(): Promise<void> {
+    toast.warn('You do not have permission to register! Sorry!')
     history.replace('/')
   }
 
@@ -41,7 +41,7 @@ export const Register = () => {
 
           <Input
             label="Email"
-            type="text"
+            type="email"
             name="email"
             placeholder="Informe seu e-mail"
             error={errors.email}

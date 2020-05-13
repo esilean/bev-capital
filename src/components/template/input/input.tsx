@@ -3,23 +3,16 @@ import { FieldError } from 'react-hook-form'
 
 import './styles.less'
 
-interface InputProps {
+type InputProps = {
   label?: string
   name: string
   type: string
   placeholder: string
   error: FieldError | undefined
-  register: any
+  register: string | ((instance: HTMLInputElement | null) => void) | React.RefObject<HTMLInputElement> | null | undefined
 }
 
-export const Input = ({
-  label,
-  name,
-  type,
-  placeholder,
-  error,
-  register,
-}: InputProps) => {
+export const Input: React.FC<InputProps> = ({ label, name, type, placeholder, error, register }: InputProps): JSX.Element => {
   return (
     <div className="input">
       {label && <label>{label}</label>}

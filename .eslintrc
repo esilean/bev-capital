@@ -11,13 +11,27 @@
         "browser": true,
         "node": true
     },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
     "settings": {
         "react": {
             "version": "detect"
         }
     },
     "rules": {
+        "@typescript-eslint/member-delimiter-style": [
+            "off"
+        ],      
+        "no-console": "warn",
         "semi": "off",
-        "quotes": ["error", "single"]
+        "quotes": [
+            "error",
+            "single"
+        ]
     }
 }

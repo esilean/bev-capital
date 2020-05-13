@@ -1,11 +1,16 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { App } from './app'
 import { Login } from '../pages/login'
 import { Register } from '../pages/register'
 
-export function Routes() {
+toast.configure({
+  autoClose: 3500,
+})
+
+export const Routes: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>

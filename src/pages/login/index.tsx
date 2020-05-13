@@ -1,25 +1,42 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import toast from '../../components/toastr'
 
 import { Input } from '../../components/template/input/input'
-
 import logoImg from '../../assets/logo/logo-bev-capital.png'
 import './styles.less'
 
-interface LoginData {
+import api from '../../services/api'
+import consts from '../../consts'
+
+type LoginData = {
   email: string
   password: string
 }
 
-export const Login = () => {
+type LoginDataResp = {
+  id: string
+  name: string
+  email: string
+  token: string
+}
+
+export const Login: React.FC = () => {
   const history = useHistory()
 
   const { register, handleSubmit, errors } = useForm<LoginData>()
 
-  function onSubmit(data: LoginData) {
-    console.log(data)
-    history.replace('/')
+  async function onSubmit(data: LoginData): Promise<void> {
+    try {
+      const resp = await api.post<LoginDataResp>('/token', data)
+
+      localStorage.setItem(consts.USER_KEY, resp.data.token)
+
+      history.replace('/')
+    } catch (error) {
+      toast.error('User and/or password invalid.')
+    }
   }
 
   return (
@@ -30,7 +47,7 @@ export const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
             label="Email"
-            type="text"
+            type="email"
             name="email"
             placeholder="Informe seu e-mail"
             error={errors.email}
