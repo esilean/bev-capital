@@ -6,6 +6,7 @@ import { LoginEnum } from '../../interfaces/enums/login'
 type StockCardProps = {
   loggedIn: LoginEnum
   symbol: string
+  website: string
   name: string
   price?: number
   low?: number
@@ -15,7 +16,7 @@ type StockCardProps = {
   handleDelete: (symbol: string) => Promise<void>
 }
 
-export const StockCard: React.FC<StockCardProps> = ({ loggedIn, symbol, name, price, low, high, previousClosePrice, latestPriceTime, handleDelete }: StockCardProps): JSX.Element => {
+export const StockCard: React.FC<StockCardProps> = ({ loggedIn, symbol, name, website, price, low, high, previousClosePrice, latestPriceTime, handleDelete }: StockCardProps): JSX.Element => {
   const priceDiff = (previousClosePrice && price) ? (((price / previousClosePrice) - 1) * 100.00) : 0.00
 
   function deleteStock(symbol: string): void {
@@ -28,9 +29,9 @@ export const StockCard: React.FC<StockCardProps> = ({ loggedIn, symbol, name, pr
         <div className="card-header">
           <div className="title">
             <span className="name">{symbol}</span>
-            <span>{name}</span>
+            <a href={website} target='_blank' rel="noopener noreferrer" >{name}</a>
           </div>
-          {loggedIn === LoginEnum.In && (<button type='button' className='btn btn-text' onClick={(): void => deleteStock(symbol)}>X</button>)}
+          {loggedIn === LoginEnum.In && (<button type='button' className='btn-text' onClick={(): void => deleteStock(symbol)}>X</button>)}
         </div>
         <div className="card-price">
           <div className="price">{(price) ? `\$ ${price}` : '-'}</div>

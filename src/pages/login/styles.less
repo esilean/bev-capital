@@ -11,8 +11,17 @@
     align-items    : center;
     justify-content: center;
 
+    @media (max-width: 370px) {
+        max-width: 35rem;
+    }
+
+
     img {
         width: 100px;
+
+        @media (max-width: 1024px) {
+            width: 80px;
+        }        
     }
 
     h2 {

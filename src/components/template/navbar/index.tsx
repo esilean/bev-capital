@@ -25,16 +25,16 @@ export const NavBar: React.FC<NavBarProps> = ({ loggedIn }: NavBarProps): JSX.El
       <img src={logoImg} className="logo" />
       <nav className="nav-user">
         <If test={loggedIn === LoginEnum.In}>
-          <a onClick={logout} className="btn btn-text">
+          <Link to={''} onClick={logout} className="btn-text">
             Sair
-          </a>
+          </Link>
         </If>
 
         <If test={loggedIn === LoginEnum.Out}>
-          <Link to="/login" className="btn btn-text">
+          <Link to="/login" className="btn-text">
             Login
           </Link>
-          <Link to="/register" className="btn btn-bg">
+          <Link to="/register" className="btn btn--primary">
             Cadastre-se
           </Link>
         </If>

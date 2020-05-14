@@ -79,10 +79,17 @@ export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
       await api.post<StockAddedData>('/usersstock/', data,
         { headers: { 'Authorization': `Bearer ${localStorage.getItem(consts.USER_KEY)}` } })
 
-      loadStocks('8a541124-04ee-45ae-90a0-7f431c83d7a1')
-
     } catch (error) {
-      toast.error('Error adding stock. Try again later...')
+
+      if (error.response) {
+        if (error.response.status === 404) toast.info('Stock is not avaiable.')
+        if (error.response.status === 400) toast.warn(error.response.data.message)
+      }
+      else {
+        toast.error('Error adding stock. Contact the admin...')
+      }
+    } finally {
+      loadStocks(consts.USER_ID)
     }
   }
   async function deleteStock(symbol: string): Promise<void> {
@@ -99,7 +106,7 @@ export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
   }
 
   useEffect(() => {
-    loadStocks('8a541124-04ee-45ae-90a0-7f431c83d7a1')
+    loadStocks(consts.USER_ID)
   }, [])
 
   return (
@@ -110,6 +117,7 @@ export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
           loggedIn={loggedIn}
           symbol={stock.symbol}
           name={stock.stock.name}
+          website={stock.stock.website}
           price={stock.stock.priceToday.latestPrice}
           low={stock.stock.priceToday.low}
           high={stock.stock.priceToday.high}
@@ -119,7 +127,7 @@ export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
         />
       ))}
       <If test={loggedIn === LoginEnum.In}>
-        {(stocks.length < 9) && (<StockCardNew handleAdd={addStock} />)}
+        {(stocks.length < 12) && (<StockCardNew handleAdd={addStock} />)}
       </If>
     </ul>
   )

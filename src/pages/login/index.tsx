@@ -63,7 +63,7 @@ export const Login: React.FC = () => {
             register={register({ required: true })}
           />
 
-          <button className="btn btn-bg" type="submit">
+          <button className="btn btn--primary" type="submit">
             Entrar
           </button>
         </form>
