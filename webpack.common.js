@@ -1,10 +1,19 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
+const webpack = require('webpack')
+const dotenv = require('dotenv')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = () => {
+  const env = dotenv.config().parsed
+  const envKeys = Object.keys(env).reduce((prev, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(env[next])
+    return prev
+  }, {})
+
+
   return {
     entry: './src/index.tsx',
     output: {
@@ -20,6 +29,7 @@ module.exports = () => {
         template: './public/index.html',
       }),
       new CleanWebpackPlugin(),
+      new webpack.DefinePlugin(envKeys)
     ],
     module: {
       rules: [

@@ -1,6 +1,0 @@
-[build]
-command = "yarn build"
-publish = "dist/"
-
-[context.production]
-environment = { REACT_APP_URL_API = "https://bev-capital.herokuapp.com/api", REACT_APP_ID = "5c402ce6-ae4f-431d-b0d2-2b71214e1386" }
