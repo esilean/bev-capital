@@ -7,7 +7,8 @@ import './styles/all.less'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Routes></Routes>
+
+    <Routes />
   </React.StrictMode>,
   document.getElementById('root')
 )

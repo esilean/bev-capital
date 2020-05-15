@@ -7,6 +7,7 @@ import { Home } from '../pages/home'
 import consts from '../consts'
 import api from '../services/api'
 import { LoginEnum } from '../interfaces/enums/login'
+import ScrollToTop from '../components/utils/scroll'
 
 export const App: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState<LoginEnum>(LoginEnum.None)
@@ -29,6 +30,7 @@ export const App: React.FC = () => {
 
   return (
     <div className="container">
+          <ScrollToTop />
       <NavBar loggedIn={loggedIn} />
       <div className="content">
         <Home loggedIn={loggedIn} />
