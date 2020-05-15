@@ -89,7 +89,7 @@ export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
         toast.error('Error adding stock. Contact the admin...')
       }
     } finally {
-      loadStocks(consts.USER_ID)
+      if(consts.USER_ID) loadStocks(consts.USER_ID)
     }
   }
   async function deleteStock(symbol: string): Promise<void> {
@@ -106,7 +106,7 @@ export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
   }
 
   useEffect(() => {
-    loadStocks(consts.USER_ID)
+    if(consts.USER_ID) loadStocks(consts.USER_ID)
   }, [])
 
   return (

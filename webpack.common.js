@@ -1,30 +1,25 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 const dotenv = require('dotenv')
 const webpack = require('webpack')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = () => {
 
-    // call dotenv and it will return an Object with a parsed key 
     const env = dotenv.config().parsed
-
-    // reduce it to a nice object, the same as before
     const envKeys = Object.keys(env).reduce((prev, next) => {
         prev[`process.env.${next}`] = JSON.stringify(env[next])
         return prev
     }, {})
 
     return {
-        devtool: 'inline-source-map',
         entry: './src/index.tsx',
         output: {
             path: path.join(__dirname, '/dist'),
-            filename: 'bundle.min.js',
+            filename: '[name].bundle.[hash].js',
             publicPath: '/'
-        },
-        devServer: {
-            port: 8080,
-            historyApiFallback: true
         },
         resolve: {
             extensions: ['.ts', '.tsx', '.js']
@@ -33,7 +28,8 @@ module.exports = () => {
             new HtmlWebpackPlugin({
                 template: './public/index.html'
             }),
-            new webpack.DefinePlugin(envKeys)
+            new webpack.DefinePlugin(envKeys),
+            new CleanWebpackPlugin(),
         ],
         module: {
             rules: [
