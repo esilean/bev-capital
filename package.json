@@ -7,7 +7,9 @@
     "dev": "webpack-dev-server --config webpack.dev.js --progress --hot",
     "build": "webpack --config webpack.prod.js",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "eslint-fix": "eslint --fix \"src/**/*.{ts,tsx}\""
+    "eslint-fix": "eslint --fix \"src/**/*.{ts,tsx}\"",
+    "test": "jest",
+    "test:watch": "yarn test --watch"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -20,9 +22,11 @@
     "react-toastify": "^6.0.4"
   },
   "devDependencies": {
+    "@types/jest": "^25.2.2",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
     "@types/react-router-dom": "^5.1.5",
+    "@types/react-test-renderer": "^16.9.2",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.31.0",
     "clean-webpack-plugin": "^3.0.0",
@@ -33,11 +37,14 @@
     "eslint-plugin-react": "^7.19.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
+    "jest": "^26.0.1",
     "less": "^3.11.1",
     "less-loader": "^6.0.0",
     "prettier": "2.0.5",
+    "react-test-renderer": "^16.13.1",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.2.1",
+    "ts-jest": "^26.0.0",
     "ts-loader": "^7.0.2",
     "typescript": "^3.8.3",
     "webpack": "^4.43.0",
