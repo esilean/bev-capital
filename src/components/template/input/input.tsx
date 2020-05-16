@@ -16,12 +16,7 @@ export const Input: React.FC<InputProps> = ({ label, name, type, placeholder, er
   return (
     <div className="input">
       {label && <label>{label}</label>}
-      <input 
-        autoComplete='off'
-        type={type} 
-        name={name} 
-        placeholder={placeholder} 
-        ref={register} />
+      <input autoComplete="off" type={type} name={name} placeholder={placeholder} ref={register} />
       {error && <span>Este campo é obrigatório</span>}
     </div>
   )

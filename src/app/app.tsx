@@ -30,7 +30,7 @@ export const App: React.FC = () => {
 
   return (
     <div className="container">
-          <ScrollToTop />
+      <ScrollToTop />
       <NavBar loggedIn={loggedIn} />
       <div className="content">
         <Home loggedIn={loggedIn} />

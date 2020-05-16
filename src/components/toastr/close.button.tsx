@@ -6,7 +6,7 @@ type CBProps = {
 
 export const CloseButton: React.FC<CBProps> = ({ color }: CBProps) => {
   return (
-    <button type='button' className='toastr-close-button' style={{ color }}>
+    <button type="button" className="toastr-close-button" style={{ color }}>
       ✖
     </button>
   )
