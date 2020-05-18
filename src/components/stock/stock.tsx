@@ -12,12 +12,10 @@ import api from '../../services/api'
 import consts from '../../consts'
 
 import socketioClient from 'socket.io-client'
-import { usePrevious } from '../utils/hooks/usePrevious'
 import { StocksProps, UserStockData, UserData, StockAddedData } from './types/stock.type'
 
 export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
   const [stocks, setStocks] = useState<UserStockData[]>([])
-  const stocksPrev = usePrevious(stocks)
 
   async function loadStocks(id: string): Promise<void> {
     try {
@@ -70,6 +68,10 @@ export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
     sockio.on('updateStocks', () => {
       if (consts.USER_ID) loadStocks(consts.USER_ID)
     })
+
+    return function cleanup(): void {
+      sockio.disconnect()
+    }
   }, [])
 
   return (

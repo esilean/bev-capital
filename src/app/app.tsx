@@ -17,9 +17,11 @@ export const App: React.FC = () => {
   useEffect(() => {
     async function validateToken(): Promise<void> {
       try {
-        const response = await api.post('/token/verify', { token })
-        if (response.data) setLoggedIn(LoginEnum.In)
-        else setLoggedIn(LoginEnum.Out)
+        if (token) {
+          const response = await api.post('/token/verify', { token })
+          if (response.data) setLoggedIn(LoginEnum.In)
+          else setLoggedIn(LoginEnum.Out)
+        } else setLoggedIn(LoginEnum.Out)
       } catch (error) {
         setLoggedIn(LoginEnum.Out)
       }
