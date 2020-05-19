@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Flash } from '../utils/animations/flash.price'
 
 import './styles.less'
 import { LoginEnum } from '../../interfaces/enums/login'
-import { UserStockData } from './types/stock.type'
+import { UserStockData, StockPrice } from './types/stock.type'
+
+import io from 'socket.io-client'
+import consts from '../../consts'
 
 type StockCardProps = {
   loggedIn: LoginEnum
@@ -13,18 +16,37 @@ type StockCardProps = {
 
 export const StockCard: React.FC<StockCardProps> = ({ loggedIn, handleDelete, userStock }: StockCardProps): JSX.Element => {
   const { symbol, stock } = userStock
-  const { name, website, priceToday } = stock
-  const { low, high, delayedPrice, delayedPriceTime, previousClosePrice } = priceToday
+  const { name, website } = stock
 
-  const priceDiff = previousClosePrice && delayedPrice ? (delayedPrice / previousClosePrice - 1) * 100.0 : 0.0
-
+  const [stockPrice, setStockPrice] = useState<StockPrice>({
+    symbol,
+    open: 0,
+    close: 0,
+    high: 0,
+    low: 0,
+    latestPrice: userStock.stock.priceToday.latestPrice,
+    latestPriceTime: new Date(),
+    previousClosePrice: userStock.stock.priceToday.previousClosePrice,
+    changePercent: 0,
+  })
   function deleteStock(symbol: string): void {
     handleDelete(symbol)
   }
 
+  useEffect(() => {
+    const sockio = io(`${consts.IO_URL}${symbol}`)
+    sockio.on(symbol, function (data: StockPrice) {
+      setStockPrice(data)
+    })
+
+    return function cleanup(): void {
+      sockio.disconnect()
+    }
+  }, [])
+
   return (
     <li>
-      <Flash price={delayedPrice}>
+      <Flash price={stockPrice.latestPrice}>
         <div className="card">
           <div className="card-header">
             <div className="title">
@@ -40,21 +62,23 @@ export const StockCard: React.FC<StockCardProps> = ({ loggedIn, handleDelete, us
             )}
           </div>
           <div className="card-price">
-            <div className="price">{delayedPrice ? `\$ ${delayedPrice}` : '-'}</div>
-            <div className="price-diff" style={priceDiff >= 0 ? { color: '#14bb14' } : { color: 'red' }}>
-              {(priceDiff * 1.0).toFixed(2)} %
+            <div className="price">{`\$ ${stockPrice.latestPrice}`}</div>
+            <div className="price-diff" style={stockPrice.changePercent >= 0 ? { color: '#14bb14' } : { color: 'red' }}>
+              {(stockPrice.changePercent * 1.0).toFixed(2)}%
             </div>
           </div>
           <div className="card-footer">
             <div className="low">
               <div>Mín.</div>
-              <div>{low ? `\$ ${(low / 1.0).toFixed(2)}` : '-'}</div>
+              <div>{stockPrice.low > 0 ? `\$ ${(stockPrice.low / 1.0).toFixed(2)}` : '-'}</div>
             </div>
             <div className="high">
               <div>Max.</div>
-              <div>{high ? `\$ ${(high / 1.0).toFixed(2)}` : '-'}</div>
+              <div>{stockPrice.high > 0 ? `\$ ${(stockPrice.high / 1.0).toFixed(2)}` : '-'}</div>
             </div>
-            <div className="time">{delayedPriceTime ? `${new Date(delayedPriceTime).toLocaleString()}` : 'no data'}</div>
+            <div className="time">
+              {stockPrice.latestPriceTime ? `${new Date(stockPrice.latestPriceTime).toLocaleString()}` : 'no data'}
+            </div>
           </div>
         </div>
       </Flash>

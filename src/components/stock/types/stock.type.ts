@@ -23,18 +23,18 @@ export type StockData = {
   name: string
   exchange: string
   website: string
-  priceToday: PriceData
+  priceToday: StockPrice
 }
 
-export type PriceData = {
+export type StockPrice = {
+  symbol: string
   open: number
   close: number
   high: number
   low: number
   latestPrice: number
   latestPriceTime: Date
-  delayedPrice: number
-  delayedPriceTime: Date
+  changePercent: number
   previousClosePrice: number
 }
 

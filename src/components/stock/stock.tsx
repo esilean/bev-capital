@@ -11,7 +11,6 @@ import { LoginEnum } from '../../interfaces/enums/login'
 import api from '../../services/api'
 import consts from '../../consts'
 
-import socketioClient from 'socket.io-client'
 import { StocksProps, UserStockData, UserData, StockAddedData } from './types/stock.type'
 
 export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
@@ -36,6 +35,8 @@ export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
       await api.post<StockAddedData>('/usersstock/', data, {
         headers: { Authorization: `Bearer ${localStorage.getItem(consts.USER_KEY)}` },
       })
+
+      if (consts.USER_ID) loadStocks(consts.USER_ID)
     } catch (error) {
       if (error.response) {
         if (error.response.status === 404) toast.info('Stock is not avaiable.')
@@ -43,8 +44,6 @@ export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
       } else {
         toast.error('Error adding stock. Contact the admin...')
       }
-    } finally {
-      if (consts.USER_ID) loadStocks(consts.USER_ID)
     }
   }
   async function deleteStock(symbol: string): Promise<void> {
@@ -60,18 +59,6 @@ export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
 
   useEffect(() => {
     if (consts.USER_ID) loadStocks(consts.USER_ID)
-  }, [])
-
-  useEffect(() => {
-    const sockio = socketioClient(consts.IO_URL)
-
-    sockio.on('updateStocks', () => {
-      if (consts.USER_ID) loadStocks(consts.USER_ID)
-    })
-
-    return function cleanup(): void {
-      sockio.disconnect()
-    }
   }, [])
 
   return (
