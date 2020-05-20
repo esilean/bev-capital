@@ -11,17 +11,23 @@ import { LoginEnum } from '../../interfaces/enums/login'
 import api from '../../services/api'
 import consts from '../../consts'
 
+import loadingImg from '../../assets/loading.svg'
+
 import { StocksProps, UserStockData, UserData, StockAddedData } from './types/stock.type'
 
 export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
   const [stocks, setStocks] = useState<UserStockData[]>([])
+  const [loading, setLoading] = useState(false)
 
   async function loadStocks(id: string): Promise<void> {
     try {
+      setLoading(true)
       const response = await api.get<UserData>(`/users/${id}`)
       setStocks(response.data.stocks)
     } catch (error) {
       toast.error('Error loading Stocks. Try again later...')
+    } finally {
+      setLoading(false)
     }
   }
   async function addStock(symbol: string): Promise<void> {
@@ -62,11 +68,18 @@ export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
   }, [])
 
   return (
-    <ul className="stocks">
-      {stocks.map((us) => (
-        <StockCard key={us.id} loggedIn={loggedIn} handleDelete={deleteStock} userStock={us} />
-      ))}
-      <If test={loggedIn === LoginEnum.In}>{stocks.length < 12 && <StockCardNew handleAdd={addStock} />}</If>
-    </ul>
+    <>
+      {loading && (
+        <div className="loadingImg">
+          <img src={loadingImg} />
+        </div>
+      )}
+      <ul className="stocks">
+        {stocks.map((us) => (
+          <StockCard key={us.id} loggedIn={loggedIn} handleDelete={deleteStock} userStock={us} />
+        ))}
+        <If test={loggedIn === LoginEnum.In}>{stocks.length < 12 && <StockCardNew handleAdd={addStock} />}</If>
+      </ul>
+    </>
   )
 }

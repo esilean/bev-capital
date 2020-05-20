@@ -25,9 +25,9 @@ export const StockCard: React.FC<StockCardProps> = ({ loggedIn, handleDelete, us
     high: 0,
     low: 0,
     latestPrice: userStock.stock.priceToday.latestPrice,
-    latestPriceTime: new Date(),
+    latestPriceTime: userStock.stock.priceToday.latestPriceTime,
     previousClosePrice: userStock.stock.priceToday.previousClosePrice,
-    changePercent: 0,
+    changePercent: userStock.stock.priceToday.changePercent,
   })
   function deleteStock(symbol: string): void {
     handleDelete(symbol)

@@ -13,7 +13,6 @@ module.exports = () => {
     return prev
   }, {})
 
-
   return {
     entry: './src/index.tsx',
     output: {
@@ -29,7 +28,7 @@ module.exports = () => {
         template: './public/index.html',
       }),
       new CleanWebpackPlugin(),
-      new webpack.DefinePlugin(envKeys)
+      new webpack.DefinePlugin(envKeys),
     ],
     module: {
       rules: [
@@ -50,6 +49,17 @@ module.exports = () => {
         {
           test: /\.(png|jpe?g|gif)$/i,
           use: ['file-loader'],
+        },
+        {
+          test: /\.svg$/,
+          use: [
+            {
+              loader: 'svg-url-loader',
+              options: {
+                limit: 10000,
+              },
+            },
+          ],
         },
       ],
     },

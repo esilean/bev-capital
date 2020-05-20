@@ -9,9 +9,8 @@
 *.snap
 
 # misc
-.DS_Store
-
-.vscode
+*.DS_Store
+*.vscode
 
 npm-debug.log*
 yarn-debug.log*
