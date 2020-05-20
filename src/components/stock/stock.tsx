@@ -74,12 +74,14 @@ export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
           <img src={loadingImg} />
         </div>
       )}
-      <ul className="stocks">
-        {stocks.map((us) => (
-          <StockCard key={us.id} loggedIn={loggedIn} handleDelete={deleteStock} userStock={us} />
-        ))}
-        <If test={loggedIn === LoginEnum.In}>{stocks.length < 12 && <StockCardNew handleAdd={addStock} />}</If>
-      </ul>
+      {!loading && (
+        <ul className="stocks">
+          {stocks.map((us) => (
+            <StockCard key={us.id} loggedIn={loggedIn} handleDelete={deleteStock} userStock={us} />
+          ))}
+          <If test={loggedIn === LoginEnum.In}>{stocks.length < 12 && <StockCardNew handleAdd={addStock} />}</If>
+        </ul>
+      )}
     </>
   )
 }
