@@ -38,11 +38,16 @@ export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
         avgPrice: 0,
       }
 
-      await api.post<StockAddedData>('/usersstock/', data, {
+      //should be refactored
+      const responseStock = await api.post<StockAddedData>('/usersstock/', data, {
         headers: { Authorization: `Bearer ${localStorage.getItem(consts.USER_KEY)}` },
       })
 
-      if (consts.USER_ID) loadStocks(consts.USER_ID)
+      const response = await api.get<UserStockData>(`/usersstock/${responseStock.data.id}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem(consts.USER_KEY)}` },
+      })
+
+      setStocks([...stocks, response.data])
     } catch (error) {
       if (error.response) {
         if (error.response.status === 404) toast.info('Stock is not avaiable.')
