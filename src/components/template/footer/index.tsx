@@ -6,10 +6,15 @@ export const Footer: React.FC = (): JSX.Element => {
   return (
     <div className="footer">
       <div className="footer-logo">
-        Bev Capital
+        Bev Capital <span>Data is delayed by at least 15 seconds</span>
         <br />
+        Data provided by{' '}
+        <a href="https://finnhub.io" target="_blank" rel="noopener noreferrer">
+          Finnhub
+        </a>{' '}
+        and/or{' '}
         <a href="https://iexcloud.io" target="_blank" rel="noopener noreferrer">
-          Data provided by IEX Cloud
+          IEX Cloud
         </a>
       </div>
       <div className="footer-nav">
@@ -25,7 +30,7 @@ export const Footer: React.FC = (): JSX.Element => {
             </a>
           </li>
         </ul>
-        <p>© 2020 feito por Leandro Bevilaqua</p>
+        <p>© 2020 made with ❤️ in Brazil by Leandro Bevilaqua during Covid-19 😭</p>
       </div>
     </div>
   )
