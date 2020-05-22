@@ -69,7 +69,10 @@ export const Stocks: React.FC<StocksProps> = ({ loggedIn }: StocksProps) => {
   }
 
   useEffect(() => {
-    if (consts.USER_ID) loadStocks(consts.USER_ID)
+    const fakerUserId = '5c402ce6-ae4f-431d-b0d2-2b71214e1386'
+    const userId = localStorage.getItem(consts.USER_ID) || fakerUserId
+
+    loadStocks(userId)
   }, [])
 
   return (

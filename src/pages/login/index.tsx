@@ -32,6 +32,7 @@ export const Login: React.FC = () => {
       const resp = await api.post<LoginDataResp>('/token', data)
 
       localStorage.setItem(consts.USER_KEY, resp.data.token)
+      localStorage.setItem(consts.USER_ID, resp.data.id)
 
       history.replace('/')
     } catch (error) {

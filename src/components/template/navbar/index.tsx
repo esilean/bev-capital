@@ -17,6 +17,7 @@ export const NavBar: React.FC<NavBarProps> = ({ loggedIn }: NavBarProps): JSX.El
 
   function logout(): void {
     localStorage.removeItem(consts.USER_KEY)
+    localStorage.removeItem(consts.USER_ID)
     history.replace('/')
   }
 
